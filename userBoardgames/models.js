@@ -33,5 +33,5 @@ BoardGame.belongsToMany(User, {
     foreignKey: 'boardGameID'
 })
 
-Sequelize.sync();
+UserBoardGame.sync();
 module.exports = UserBoardGame
