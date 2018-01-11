@@ -13,4 +13,16 @@ let BoardGame = sequelize.define("BoardGames", {
     timestamps: false
 });
 
+
+BoardGame.associate = (models) => {
+  BoardGame.belongsToMany(models.User, {
+    through: 'UserBoardGame',
+    as: 'users',
+    foreignKey: 'boardGameID'
+  })
+};
+
+
+//BoardGame.sync();
+
 module.exports = BoardGame

@@ -5,4 +5,6 @@ let sequelize = new Sequelize('mainDB', null, null, {
     storage: './db/database.sqlite',
 });
 
+sequelize.sync();
+
 module.exports = sequelize

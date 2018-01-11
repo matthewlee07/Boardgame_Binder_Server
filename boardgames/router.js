@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BoardGame = require('./models');
+const UserBoardGame = require('../userBoardgames/models');
 
 router.get('/', (req, res) => {
     //req.query are native to Express
