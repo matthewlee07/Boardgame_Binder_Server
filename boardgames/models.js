@@ -1,5 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
+const User = require('../users/models');
+const UserBoardGame = require('../userBoardgames/models');
+
 let BoardGame = sequelize.define("BoardGames", {
     "id": { type: Sequelize.INTEGER, primaryKey: true, field: 'game.id' },
     "description": { type: Sequelize.STRING, field: 'details.description' },
@@ -14,15 +17,18 @@ let BoardGame = sequelize.define("BoardGames", {
 });
 
 
-BoardGame.associate = (models) => {
-  BoardGame.belongsToMany(models.User, {
-    through: 'UserBoardGame',
-    as: 'users',
-    foreignKey: 'boardGameID'
-  })
-};
+
+BoardGame.belongsToMany(User, {
+  through: UserBoardGame,
+  as: 'users',
+  foreignKey: 'boardGameID'
+});
 
 
-//BoardGame.sync();
+User.belongsToMany(BoardGame, {
+  through: UserBoardGame,
+  as: 'games',
+  foreignKey: 'userID'
+});
 
-module.exports = BoardGame
+module.exports = BoardGame;
