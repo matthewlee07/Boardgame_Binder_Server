@@ -1,6 +1,5 @@
 const sequelize = require('../config/db');
 const Sequelize = require('sequelize');
-// const bcrypt = require('bcryptjs');
 
 let User = sequelize.define("Users", {
     "userName": { type: Sequelize.STRING, required: true, unique: true },
@@ -11,15 +10,5 @@ let User = sequelize.define("Users", {
     "dob": { type: Sequelize.DATEONLY, required: true },
 }, { indexes: [] })
 
-
-User.associate = (models) => {
-  User.belongsToMany(models.BoardGame, {
-    through: 'UserBoardGame',
-    as: 'games',
-    foreignKey: 'userID'
-  })
-};
-//sequelize redefines User table
-//User.sync();
 
 module.exports = User

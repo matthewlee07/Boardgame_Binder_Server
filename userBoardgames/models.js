@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
-const BoardGame = require('../boardgames/models');
-const User = require('../users/models');
 
 let UserBoardGame = sequelize.define("UserBoardGame", {
     "id": { type: Sequelize.INTEGER, primaryKey: true, field: 'UserBoardGame.id' },
@@ -16,5 +14,4 @@ let UserBoardGame = sequelize.define("UserBoardGame", {
     "rating": { type: Sequelize.INTEGER, field: 'stats.average' },
 });
 
-//UserBoardGame.sync();
 module.exports = UserBoardGame
