@@ -16,8 +16,15 @@ router.post('/', jsonParser, (req, res) => {
                     where: { id: req.body.boardgameID }
                 })
                 .then(game => {
-
-                    user.addGames(game).then(() => {
+                    user.addGames(game, {
+                        through: {
+                            description: game.description,
+                            image: game.image,
+                            minplayers: game.minplayers,
+                            maxplayers: game.maxplayers
+                            }
+                        })
+                        .then(() => {
                         res.json(game);
                         console.log('userboardgame success');
                     })
