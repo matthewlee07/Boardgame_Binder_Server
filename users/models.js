@@ -11,7 +11,15 @@ let User = sequelize.define("Users", {
     "dob": { type: Sequelize.DATEONLY, required: true },
 }, { indexes: [] })
 
+
+User.associate = (models) => {
+  User.belongsToMany(models.BoardGame, {
+    through: 'UserBoardGame',
+    as: 'games',
+    foreignKey: 'userID'
+  })
+};
 //sequelize redefines User table
-User.sync();
+//User.sync();
 
 module.exports = User

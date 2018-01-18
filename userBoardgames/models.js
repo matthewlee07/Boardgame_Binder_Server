@@ -14,24 +14,7 @@ let UserBoardGame = sequelize.define("UserBoardGame", {
     "playingtime": { type: Sequelize.INTEGER, field: 'details.playingtime' },
     "name": { type: Sequelize.STRING, field: 'details.name' },
     "rating": { type: Sequelize.INTEGER, field: 'stats.average' },
-})
+});
 
-User.belongsToMany(BoardGame, {
-    through: {
-        model: UserBoardGame,
-        unique: true
-    },
-    foreignKey: 'userID'
-})
-
-
-BoardGame.belongsToMany(User, {
-    through: {
-        model: UserBoardGame,
-        unique: true
-    },
-    foreignKey: 'boardGameID'
-})
-
-UserBoardGame.sync();
+//UserBoardGame.sync();
 module.exports = UserBoardGame
