@@ -10,7 +10,13 @@ router.get('/', (req, res) => {
     BoardGame
         .findAll({
             limit: pageSize,
-            offset: page * pageSize
+            offset: page * pageSize,
+            where: {
+                minplayers: {
+                    [Op.gte]: req.query.minplayers || 1
+                }
+            }
+            // continue with min/max range
         }).then(games => {
             res.json(games);
         })
