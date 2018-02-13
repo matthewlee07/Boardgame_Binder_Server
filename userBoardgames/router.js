@@ -40,7 +40,10 @@ router.post('/', jsonParser, (req, res) => {
                                 description: game.description,
                                 image: game.image,
                                 minplayers: game.minplayers,
-                                maxplayers: game.maxplayers
+                                maxplayers: game.maxplayers,
+                                //
+                                minrating: game.minrating,
+                                maxrating: game.maxrating,
                             }
                         })
                             .then((user) => {
