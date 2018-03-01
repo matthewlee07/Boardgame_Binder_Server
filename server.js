@@ -18,7 +18,6 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 app.use(morgan('common', { skip: () => process.env.NODE_ENV === 'test' }));
 app.use(cors());
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/boardgames', BoardGameRouter);
 app.use('/users', UserRouter);
