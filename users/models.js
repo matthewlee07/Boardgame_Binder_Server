@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const sequelize = require('../config/db');
 const Sequelize = require('sequelize');
 
@@ -10,5 +11,20 @@ let User = sequelize.define("Users", {
     "dob": { type: Sequelize.DATEONLY, required: true },
 }, { indexes: [] })
 
+User.apiRepr = function () {
+    return {
+        userName: this.userName || '',
+        firstName: this.firstName || '',
+        lastName: this.lastName || '',
+    };
+};
 
-module.exports = User
+User.validatePassword = function (password, userpassword) {
+    return bcrypt.compare(password, userpassword);
+};
+
+User.hashPassword = function (password) {
+    return bcrypt.hash(password, 10);
+}
+
+module.exports = User;

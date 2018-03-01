@@ -12,14 +12,18 @@ const BoardGameRouter = require('./boardgames/router');
 const UserRouter = require('./users/router');
 const UserBoardGameRouter = require('./userBoardgames/router');
 const app = express();
+const AuthRouter = require('./auth/router');
+const { localStrategy, jwtStrategy } = require('./auth/strategies');
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 app.use(morgan('common', { skip: () => process.env.NODE_ENV === 'test' }));
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/boardgames', BoardGameRouter);
 app.use('/users', UserRouter);
-app.use('/userboardgames', UserBoardGameRouter)
-
+app.use('/userboardgames', UserBoardGameRouter);
+app.use('/auth', AuthRouter);
 app.use('*', (req, res) => {
     return res.status(404).json({ message: 'Not Found' });
 })

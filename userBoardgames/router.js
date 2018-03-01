@@ -41,7 +41,6 @@ router.post('/', jsonParser, (req, res) => {
                                 image: game.image,
                                 minplayers: game.minplayers,
                                 maxplayers: game.maxplayers,
-                                //
                                 minrating: game.minrating,
                                 maxrating: game.maxrating,
                             }

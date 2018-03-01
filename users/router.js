@@ -1,15 +1,16 @@
 const express = require('express');
-const router = express.Router();
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
-// const jwt = require('jsonwebtoken');
-// const passport = require('passport');
-// const jwtAuth = passport.authenticate('jwt', { session: false });
-// const basicAuth = passport.authenticate('basic', { session: false });
-
+const jsonParser = require('body-parser').json();
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const User = require('./models');
+const BoardGame = require('../boardgames/models');
+const config = require('../config');
+const basicAuth = passport.authenticate('basic', { session: false });
+const jwtAuth = passport.authenticate('jwt', { session: false });
+const router = express.Router();
+router.use(jsonParser);
 
-router.get('/', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
     User
         .findAll({})
         .then(users => {
@@ -38,25 +39,34 @@ router.get('/:id', (req, res) => {
 
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ["userName", "firstName", "lastName", "email", "password", "dob"]
-    // const missingField = requiredFields.find(field => !(field in req.body));
-    User.create({
-        userName: req.body.userName,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        dob: req.body.dob
+    const missingField = requiredFields.find(field => !(field in req.body));
+    if (missingField) {
+        return res.status(422).json({
+            code: 422,
+            reason: 'ValidationError',
+            message: 'Missing field',
+            location: missingField
+        });
+    }
+    User.hashPassword(req.body.password).then(hash => {
+        User.create({
+            userName: req.body.userName,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hash,
+            dob: req.body.dob
+        })
+            .then(user => {
+                res.json(user);
+            })
+            .catch(err => {
+                res.status(500).json({ code: 500, message: err });
+            })
     })
-        .then(user => {
-            res.json(user);
-        })
-        .catch(err => {
-            res.status(500).json({ code: 500, message: err.message });
-        })
 })
 
-router.put('/:id', jsonParser, (req, res) => {
-    console.log('put req: ' + req.body)
+router.put('/:id', jsonParser, jwtAuth, (req, res) => {
     // const updates = req.body.updates;
     User
         .find({
