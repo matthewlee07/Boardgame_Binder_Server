@@ -18,7 +18,7 @@ router.use(bodyParser.json());
 // The user provides a username and password to login
 router.post('/login', localAuth, (req, res) => {
     const user = {
-        username: req.user.userName,
+        username: req.user.username,
         firstname: req.user.firstName,
         lastname: req.user.lastName,
     };
