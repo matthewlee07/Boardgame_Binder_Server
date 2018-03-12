@@ -10,7 +10,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 const router = express.Router();
 router.use(jsonParser);
 
-router.get('/', jwtAuth, (req, res) => {
+router.get('/', (req, res) => {
     User
         .findAll({})
         .then(users => {
@@ -39,7 +39,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', jsonParser, (req, res) => {
     // removed "dob" from required fields
-    const requiredFields = ["username", "firstName", "lastName", "email", "password"]
+    const requiredFields = ["userName", "firstName", "lastName", "email", "password"]
     const missingField = requiredFields.find(field => !(field in req.body));
     if (missingField) {
         return res.status(422).json({
@@ -51,7 +51,7 @@ router.post('/', jsonParser, (req, res) => {
     }
     User.hashPassword(req.body.password).then(hash => {
         User.create({
-            username: req.body.username,
+            userName: req.body.userName,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,

@@ -3,7 +3,7 @@ const sequelize = require('../config/db');
 const Sequelize = require('sequelize');
 
 let User = sequelize.define("Users", {
-    "username": { type: Sequelize.STRING, required: true, unique: true },
+    "userName": { type: Sequelize.STRING, required: true, unique: true },
     "firstName": { type: Sequelize.STRING, required: true },
     "lastName": { type: Sequelize.STRING, required: true },
     "email": { type: Sequelize.STRING, required: true, unique: true, validate: { isEmail: { args: true, msg: "invalid email" } } },
@@ -14,7 +14,7 @@ let User = sequelize.define("Users", {
 
 User.apiRepr = function () {
     return {
-        username: this.username || '',
+        userName: this.userName || '',
         firstName: this.firstName || '',
         lastName: this.lastName || '',
     };
