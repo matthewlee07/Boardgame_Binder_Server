@@ -56,7 +56,7 @@ router.post('/', jsonParser, (req, res) => {
     })
         .then(user => {
             if (user.get('count') > 0) {
-                return res.status(422).json({
+                return Promise.reject({
                     code: 422,
                     reason: 'ValidationError',
                     message: 'Username or Email taken',
@@ -74,13 +74,17 @@ router.post('/', jsonParser, (req, res) => {
                 password: hash,
                 // dob: req.body.dob
             })
-                .then(user => {
-                    res.json(user);
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).json({ code: 500, message: err });
-                })
+
+        })
+        .then(user => {
+          res.json(user);
+        })
+        .catch(err => {
+          console.log(err);
+          if(err.reason == 'ValidationError'){
+            return res.status(err.code).json(err);
+          }
+          res.status(500).json({ code: 500, message: err });
         })
 })
 
