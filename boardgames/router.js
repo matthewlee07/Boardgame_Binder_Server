@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
             offset: page * pageSize,
             where: {
                 name: {
-                    [Op.like]: "%"+req.query.name+"%"
+                    [Op.like]: "%" + (req.query.name || "game") + "%"
                 },
                 minplayers: {
                     [Op.gte]: req.query.minplayers || 1
