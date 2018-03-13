@@ -8,6 +8,7 @@ const config = require('../config');
 const basicAuth = passport.authenticate('basic', { session: false });
 const jwtAuth = passport.authenticate('jwt', { session: false });
 const router = express.Router();
+let Sequelize = require('sequelize');
 router.use(jsonParser);
 
 router.get('/', (req, res) => {
@@ -49,22 +50,38 @@ router.post('/', jsonParser, (req, res) => {
             location: missingField
         });
     }
-    User.hashPassword(req.body.password).then(hash => {
-        User.create({
-            userName: req.body.userName,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hash,
-            // dob: req.body.dob
-        })
-            .then(user => {
-                res.json(user);
-            })
-            .catch(err => {
-                res.status(500).json({ code: 500, message: err });
-            })
+    User.find({
+        where: { userName: req.body.userName },
+        attributes: [[Sequelize.fn('COUNT', Sequelize.col('userName')), 'count']]
     })
+        .then(user => {
+            if (user.get('count') > 0) {
+                return res.status(422).json({
+                    code: 422,
+                    reason: 'ValidationError',
+                    message: 'Username or Email taken',
+                    location: 'username'
+                });
+            }
+            return User.hashPassword(req.body.password)
+        })
+        .then(hash => {
+            User.create({
+                userName: req.body.userName,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: hash,
+                // dob: req.body.dob
+            })
+                .then(user => {
+                    res.json(user);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({ code: 500, message: err });
+                })
+        })
 })
 
 router.put('/:id', jsonParser, jwtAuth, (req, res) => {
