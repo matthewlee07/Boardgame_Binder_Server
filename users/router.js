@@ -9,6 +9,8 @@ const basicAuth = passport.authenticate('basic', { session: false });
 const jwtAuth = passport.authenticate('jwt', { session: false });
 const router = express.Router();
 let Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 router.use(jsonParser);
 
 router.get('/', (req, res) => {
@@ -51,7 +53,7 @@ router.post('/', jsonParser, (req, res) => {
         });
     }
     User.find({
-        where: { userName: req.body.userName },
+        where: { [Op.or]: [{ userName: req.body.userName }, { email: req.body.email }] },
         attributes: [[Sequelize.fn('COUNT', Sequelize.col('userName')), 'count']]
     })
         .then(user => {
@@ -83,6 +85,7 @@ router.post('/', jsonParser, (req, res) => {
             return res.status(err.code).json(err);
           }
           res.status(500).json({ code: 500, message: err });
+
         })
 })
 

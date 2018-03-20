@@ -22,6 +22,7 @@ router.post('/login', localAuth, (req, res) => {
         userName: req.user.userName,
         firstname: req.user.firstName,
         lastname: req.user.lastName,
+        id: req.user.id
     };
     const authToken = createAuthToken(user);
     user.token = authToken;

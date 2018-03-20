@@ -4,11 +4,13 @@ const BoardGame = require('../boardgames/models');
 const User = require('../users/models');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const passport = require('passport');
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
-router.get('/:id', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
     User
         .find({
-            where: { id: req.params.id },
+            where: { id: req.user.id },
             include: ["games"]
         })
         .then(user => {
