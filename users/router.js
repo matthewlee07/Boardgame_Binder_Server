@@ -68,7 +68,7 @@ router.post('/', jsonParser, (req, res) => {
             return User.hashPassword(req.body.password)
         })
         .then(hash => {
-            User.create({
+            return User.create({
                 userName: req.body.userName,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -76,17 +76,16 @@ router.post('/', jsonParser, (req, res) => {
                 password: hash,
                 // dob: req.body.dob
             })
-
         })
         .then(user => {
-            res.json(user);
+          res.json(user);
         })
         .catch(err => {
-            console.log(err);
-            if (err.reason == 'ValidationError') {
-                return res.status(err.code).json(err);
-            }
-            res.status(500).json({ code: 500, message: err });
+          if(err.reason == 'ValidationError'){
+            return res.status(err.code).json(err);
+          }
+          res.status(500).json({ code: 500, message: err });
+
         })
 })
 
