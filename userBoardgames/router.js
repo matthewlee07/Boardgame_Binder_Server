@@ -21,10 +21,10 @@ router.get('/', jwtAuth, (req, res) => {
         });
 });
 
-router.post('/', jsonParser, (req, res) => {
+router.post('/', jwtAuth, jsonParser, (req, res) => {
     User
         .find({
-            where: { id: req.body.userID },
+            where: { id: req.user.id },
             include: ["games"]
         })
         .then(user => {
