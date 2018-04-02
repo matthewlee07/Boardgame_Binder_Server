@@ -20,7 +20,7 @@ router.get('/', jwtAuth, (req, res) => {
             res.status(500).json({ error: 'internal server error' });
         });
 });
-// what is jsonParser doing here?
+
 router.post('/', jwtAuth, jsonParser, (req, res) => {
     User
         .find({
@@ -67,7 +67,12 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
 //             where: { id: req.user.id },
 //             include: ["games"]
 //         })
-//         .then()
+//         .then(user => {
+//              return user.updatedAttributes()
+//         })
+//         .then(updatedUser => {
+//              res.json(updatedUser);
+//         })
 //         .catch(err => {
 //             console.log(err)
 //         })
@@ -82,6 +87,11 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
 //         .then(user => {
 
 //         })
+//         .destroy({
+//              where: {
+//                  boardgameID: req.
+//              }
+//          })
 //         .catch(err => {
 //             console.log(err)
 //         })

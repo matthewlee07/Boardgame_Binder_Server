@@ -41,7 +41,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', jsonParser, (req, res) => {
-    // removed "dob" from required fields
     const requiredFields = ["userName", "firstName", "lastName", "email", "password"]
     const missingField = requiredFields.find(field => !(field in req.body));
     if (missingField) {
