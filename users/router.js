@@ -78,13 +78,13 @@ router.post('/', jsonParser, (req, res) => {
             })
         })
         .then(user => {
-          res.json(user);
+            res.json(user);
         })
         .catch(err => {
-          if(err.reason == 'ValidationError'){
-            return res.status(err.code).json(err);
-          }
-          res.status(500).json({ code: 500, message: err });
+            if (err.reason == 'ValidationError') {
+                return res.status(err.code).json(err);
+            }
+            res.status(500).json({ code: 500, message: err });
 
         })
 })
