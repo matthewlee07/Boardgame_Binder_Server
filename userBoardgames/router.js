@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const passport = require('passport');
 const jwtAuth = passport.authenticate('jwt', { session: false });
-
+const UserBoardGame = require('./models');
 router.get('/', jwtAuth, (req, res) => {
     User
         .find({
@@ -61,40 +61,34 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
         })
 })
 
-// router.put('/', jwtAuth, jsonParser, (req, res) => {
-//     User
-//         .find({
-//             where: { id: req.user.id },
-//             include: ["games"]
-//         })
-//         .then(user => {
-//              return user.updatedAttributes()
-//         })
-//         .then(updatedUser => {
-//              res.json(updatedUser);
-//         })
-//         .catch(err => {
-//             console.log(err)
-//         })
-// })
+router.put('/:id', jwtAuth, jsonParser, (req, res) => {
+    UserBoardGame
+        .update({
+            minplayers: req.params.minplayers,
+            maxplayers: req.params.maxplayers,
+            playingtime: req.params.playingtime,
+            rating: req.params.rating,
+        },
+            { where: { id: req.params.id } })
+        .then(updatedUser => {
+            res.json(updatedUser);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
 
-// router.delete('/', jwtAuth, (req, res) => {
-//     User
-//         .find({
-//             where: { id: req.user.id },
-//             include: ["games"]
-//         })
-//         .then(user => {
-
-//         })
-//         .destroy({
-//              where: {
-//                  boardgameID: req.
-//              }
-//          })
-//         .catch(err => {
-//             console.log(err)
-//         })
-// })
+router.delete('/:id', jwtAuth, (req, res) => {
+    UserBoardGame
+        .destroy({
+            where: { boardgameID: req.params.id }
+        })
+        .then(deleted => {
+            res.json(deleted)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
 
 module.exports = router;
