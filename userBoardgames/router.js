@@ -41,10 +41,11 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
                             through: {
                                 description: game.description,
                                 image: game.image,
+                                numplayers: game.numplayers,
                                 minplayers: game.minplayers,
                                 maxplayers: game.maxplayers,
-                                minrating: game.minrating,
-                                maxrating: game.maxrating,
+                                rating: game.rating,
+                                playingtime: game.playingtime,
                             }
                         })
                             .then((user) => {
@@ -64,10 +65,9 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
 router.put('/:id', jwtAuth, jsonParser, (req, res) => {
     UserBoardGame
         .update({
-            minplayers: req.params.minplayers,
-            maxplayers: req.params.maxplayers,
-            playingtime: req.params.playingtime,
-            rating: req.params.rating,
+            numplayers: req.body.numplayers,
+            playingtime: req.body.playingtime,
+            rating: req.body.rating,
         },
             { where: { id: req.params.id } })
         .then(updatedUser => {

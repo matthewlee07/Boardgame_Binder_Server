@@ -7,6 +7,7 @@ let UserBoardGame = sequelize.define("UserBoardGame", {
     "boardGameID": { type: Sequelize.INTEGER },
     "description": { type: Sequelize.STRING, field: 'details.description' },
     "image": { type: Sequelize.STRING, field: 'details.image' },
+    "numplayers": { type: Sequelize.INTEGER, field: 'details.minplayers' },
     "minplayers": { type: Sequelize.INTEGER, field: 'details.minplayers' },
     "maxplayers": { type: Sequelize.INTEGER, field: 'details.maxplayers' },
     "playingtime": { type: Sequelize.INTEGER, field: 'details.playingtime' },
