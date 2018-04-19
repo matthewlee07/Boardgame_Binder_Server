@@ -81,7 +81,7 @@ router.put('/:id', jwtAuth, jsonParser, (req, res) => {
 router.delete('/:id', jwtAuth, (req, res) => {
     UserBoardGame
         .destroy({
-            where: { boardgameID: req.params.id }
+            where: { id: req.params.id }
         })
         .then(deleted => {
             res.json(deleted)
