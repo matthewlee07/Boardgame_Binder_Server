@@ -8,8 +8,6 @@ let User = sequelize.define("Users", {
     "lastName": { type: Sequelize.STRING, required: true },
     "email": { type: Sequelize.STRING, required: true, unique: true, validate: { isEmail: { args: true, msg: "invalid email" } } },
     "password": { type: Sequelize.STRING, required: true },
-    // "dob": { type: Sequelize.DATEONLY, required: true },
-    // postman accepts invalid date format vs YEAR-MONTH-DAY (w/o dashes)
 }, { indexes: [] })
 
 User.apiRepr = function () {

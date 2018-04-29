@@ -1,9 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-//Morgan is used for logging request details to console
 const morgan = require('morgan');
-//Node tool
 const path = require('path');
 const { PORT } = require('./config');
 const passport = require('passport');
