@@ -1,10 +1,10 @@
 let Sequelize = require('sequelize');
-
-let sequelize = new Sequelize(process.env.DATABASE_URL, null, null, {
-    dialect: 'postgres',
-    protocol: 'postgres',
-    port: match[4],
-    host: match[3],
+console.log(process.env.DATABASE_URL);
+let sequelize = new Sequelize(process.env.DATABASE_URL, {
+    // dialect: 'postgres',
+    // protocol: 'postgres',
+    // port: match[4],
+    // host: match[3],
     logging: true //false
 
 });
