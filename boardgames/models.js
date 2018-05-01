@@ -18,7 +18,7 @@ let BoardGame = sequelize.define("BoardGames", {
 
 BoardGame.belongsToMany(User, {
   through: UserBoardGame,
-  as: 'users',
+  as: 'members',
   foreignKey: 'boardGameID'
 });
 
