@@ -4,7 +4,7 @@ const User = require('../users/models');
 const UserBoardGame = require('../userBoardgames/models');
 
 let BoardGame = sequelize.define("BoardGames", {
-  "id": { type: Sequelize.INTEGER, primaryKey: true, field: 'game.id' },
+  "id": { type: Sequelize.INTEGER, primaryKey: true, field: '[game.id]' },
   "description": { type: Sequelize.STRING, field: 'details.description' },
   "image": { type: Sequelize.STRING, field: 'details.image' },
   "minplayers": { type: Sequelize.INTEGER, field: 'details.minplayers' },
