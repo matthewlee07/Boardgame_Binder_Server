@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
 
 let UserBoardGame = sequelize.define("UserBoardGame", {
-    "id": { type: Sequelize.INTEGER, primaryKey: true, field: 'UserBoardGame.id' },
+    "id": { type: Sequelize.INTEGER, primaryKey: true, field: 'UserBoardGame_id' },
     "userID": { type: Sequelize.INTEGER },
     "boardGameID": { type: Sequelize.INTEGER },
     "description": { type: Sequelize.STRING, field: 'details_description' },
