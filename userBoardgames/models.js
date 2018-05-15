@@ -4,6 +4,7 @@ const sequelize = require('../config/db');
 let UserBoardGame = sequelize.define("UserBoardGame", {
     "userID": { type: Sequelize.INTEGER },
     "boardGameID": { type: Sequelize.INTEGER },
+    "description": { type: Sequelize.TEXT, field: 'details_description' },
     "image": { type: Sequelize.STRING, field: 'details_image' },
     "numplayers": { type: Sequelize.INTEGER, field: 'details_minplayers' },
     "minplayers": { type: Sequelize.INTEGER, field: 'details_minplayers' },

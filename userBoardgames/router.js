@@ -40,6 +40,7 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
                     .then(game => {
                         user.addGames(game, {
                             through: {
+                                description: game.description,
                                 image: game.image,
                                 numplayers: game.numplayers,
                                 minplayers: game.minplayers,
