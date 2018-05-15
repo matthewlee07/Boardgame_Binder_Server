@@ -64,7 +64,7 @@ router.post('/', jsonParser, (req, res) => {
                     location: 'username'
                 });
             }
-            return User.hashPassword(req.body.password)
+            return User.hashPassword(req.body.password.password)
         })
         .then(hash => {
             return User.create({
@@ -73,7 +73,6 @@ router.post('/', jsonParser, (req, res) => {
                 lastName: req.body.lastName,
                 email: req.body.email,
                 password: hash,
-                // dob: req.body.dob
             })
         })
         .then(user => {
@@ -90,7 +89,6 @@ router.post('/', jsonParser, (req, res) => {
 })
 
 router.put('/:id', jsonParser, jwtAuth, (req, res) => {
-    // const updates = req.body.updates;
     User
         .find({
             where: {
