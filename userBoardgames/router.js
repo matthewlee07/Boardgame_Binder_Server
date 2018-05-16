@@ -79,11 +79,10 @@ router.put('/:id', jwtAuth, jsonParser, (req, res) => {
         })
 })
 
-router.delete('/:boardGameID', jwtAuth, (req, res) => {
-    console.log('deleting req.params.id:' + req.params.id)
+router.delete('/:id', jwtAuth, (req, res) => {
     UserBoardGame
         .destroy({
-            where: { boardGameID: req.params.id }
+            where: { id: req.params.id }
         })
         .then(deleted => {
             res.json(deleted)
