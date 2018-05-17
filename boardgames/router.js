@@ -46,10 +46,6 @@ router.get('/', (req, res) => {
                     [Op.between]: [req.query.minrating || 0, req.query.maxrating || 10]
                 }
             },
-<<<<<<< HEAD
-            order: Sequelize.random()
-=======
->>>>>>> 58d8d297e2c48bf6e00cebf71fec315c1324aec5
         })
         .then(games => {
             res.json(games);
