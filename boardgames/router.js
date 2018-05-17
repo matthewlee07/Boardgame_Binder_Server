@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
                     [Op.between]: [req.query.minrating || 0, req.query.maxrating || 10]
                 }
             },
-            order: ['name', 'DESC']
+            order: [name, 'DESC']
         })
         .then(games => {
             res.json(games);
