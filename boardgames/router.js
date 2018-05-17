@@ -8,7 +8,7 @@ const Op = Sequelize.Op;
 router.get('/', (req, res) => {
     let page = req.query.page || 0;
     let pageSize = req.query.pageSize || 10;
-    seqlize.query[`select game_id as id, details_description as description, details_image as image,
+    Sequelize.query[`select game_id as id, details_description as description, details_image as image,
         details_minplayers as minplayers, details_maxplayers as maxplayers, details_playingtime as playingtime,
         details_name as name, stats_average as rating from "BoardGames" where details_name like :name and
         details_minplayers > :minplayers and details_maxplayers < :maxplayers and details_playingtime between :minplayingtime
