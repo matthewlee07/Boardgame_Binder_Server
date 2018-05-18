@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: ZChw1V8JayUfq3fSnfYfVlnPCzzc0oU6pzZSAepedvDlF1n5KIKhz9G6QC7yJ6Jt3Sfkzc6Jc4+N2Qt2uv5tCm5XxauyHBkDapqS8Yfyaa2jNxsXuOw5kXHzUZbPNB/4xapwE0HT7DaWbqRJq7vm6mg8/JVz01N3zXossAHZuHHTolYIKnflPMZNRIOK13JDCC/2tcoifmDUYFL/CDHh4bD85NMLNnaq/lZnmjFckJ0Cv95NQ+7LP+m9PG46CJFXXSBFmOXjbJ998DivqnG2kKrveMy07l2sA9wuVEInPRu993sLXYTBRbJ8Um5W9S11mc1f/k91TBURDKg+nSAZWP0wfL2qZ/DzAo6VlM67KYB8wVueavODbSgEHo0PXts9Qxv2IKcua38Qq8IAeSnUfQAF74AMlJJMp0Muo4naW5mVksOwa/Tg95NUDni7dg7ISBYpifoXgp1eLt+P8sp9n+Im72WImvGS/9tiukt4d+/MXz0Ti/BbcRD1dzaoMRkbR/P8raSPQHrD5mQvY+vCGYkWaaXZMOMUrTMa2Fh24lYE411Qrd0JmfR04yFZ1oH/VK6cC0rCtXAIO+IQYfeH5YDHfM8zLL+cbLGtzSomBCGoVu8uM/PcQQffdo03lE2oI5FUYAans8ttEGXZMbEy5/SI67QJaVKGcXujhl8X9FM=
+  app: boardgame-binder
+  on:
+    repo: matthewlee07/boardgameProfile
