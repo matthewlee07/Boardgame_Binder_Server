@@ -64,7 +64,7 @@ router.post('/', jsonParser, (req, res) => {
                     location: 'username'
                 });
             }
-            return User.hashPassword(req.body.password.password)
+            return User.hashPassword(req.body.password)
         })
         .then(hash => {
             return User.create({
