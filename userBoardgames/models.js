@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
 
 let UserBoardGame = sequelize.define("UserBoardGame", {
-    "id": { type: Sequelize.INTEGER, primaryKey: true },
+    "id": { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
     "userID": { type: Sequelize.INTEGER },
     "boardGameID": { type: Sequelize.INTEGER },
     "description": { type: Sequelize.TEXT, field: 'details_description' },
