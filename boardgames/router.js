@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
             offset: page * pageSize,
             where: {
                 name: {
-                    [Op.iLike]: "%" + (req.query.name || "game") + "%"
+                    [Op.like]: "%" + (req.query.name || "game") + "%"
                 },
                 minplayers: {
                     [Op.gte]: req.query.minplayers || 1
@@ -28,12 +28,8 @@ router.get('/', (req, res) => {
                 rating: {
                     [Op.between]: [req.query.minrating || 0, req.query.maxrating || 10]
                 }
-            },
-            order: [
-                ['stats_average', 'DESC']
-            ]
-        })
-        .then(games => {
+            }
+        }).then(games => {
             res.json(games);
         })
         .catch(err => {
