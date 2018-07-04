@@ -2,4 +2,3 @@ node_modules/
 .env
 db/
 package-lock.json
-.idea/
