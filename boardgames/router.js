@@ -4,6 +4,7 @@ const BoardGame = require('./models');
 const UserBoardGame = require('../userBoardgames/models');
 let Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const jsonParser = require('body-parser').json();
 
 router.get('/', (req, res) => {
     let page = req.query.page || 0;
@@ -56,5 +57,28 @@ router.get('/:id', (req, res) => {
             res.status(500).json({ error: 'internal server error' });
         });
 });
+// purely for testing postman connection
+// router.post('/', jsonParser, (req, res) => {
+//     BoardGame.find({})
+//         .then(() => {
+//             return BoardGame.create({
+//                 id:req.body.id,
+//                 description: req.body.description,
+//                 maxplayers: req.body.maxplayers,
+//                 minplayers: req.body.minplayers,
+//             })
+//         })
+//         .then(game => {
+//             res.json(game);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             if (err.reason == 'ValidationError') {
+//                 return res.status(err.code).json(err);
+//             }
+//             res.status(500).json({ code: 500, message: err });
+
+//         })
+// })
 
 module.exports = router;
