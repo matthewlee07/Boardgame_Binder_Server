@@ -4,6 +4,7 @@ let sequelize = new Sequelize({
     password: 'Freecoding18',
     dialect: "postgres",
     storage: './db/BoardGames.sql',
+    // operatorsAliases: false
 });
 
 sequelize.sync();
