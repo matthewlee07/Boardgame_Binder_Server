@@ -57,28 +57,5 @@ router.get('/:id', (req, res) => {
             res.status(500).json({ error: 'internal server error' });
         });
 });
-// purely for testing postman connection
-// router.post('/', jsonParser, (req, res) => {
-//     BoardGame.find({})
-//         .then(() => {
-//             return BoardGame.create({
-//                 id:req.body.id,
-//                 description: req.body.description,
-//                 maxplayers: req.body.maxplayers,
-//                 minplayers: req.body.minplayers,
-//             })
-//         })
-//         .then(game => {
-//             res.json(game);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             if (err.reason == 'ValidationError') {
-//                 return res.status(err.code).json(err);
-//             }
-//             res.status(500).json({ code: 500, message: err });
-
-//         })
-// })
 
 module.exports = router;
