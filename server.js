@@ -4,7 +4,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 const passport = require('passport');
-const BoardGame = require('./config/db');
 
 const BoardGameRouter = require('./boardgames/router');
 const UserRouter = require('./users/router');
@@ -12,7 +11,6 @@ const UserBoardGameRouter = require('./userBoardgames/router');
 const AuthRouter = require('./auth/router');
 const { localStrategy, jwtStrategy } = require('./auth/strategies');
 const { PORT } = require('./config');
-// *const jwtAuth = passport.authenticate('jwt', { session: false });
 
 const app = express();
 
@@ -27,9 +25,6 @@ app.use('/boardgames', BoardGameRouter);
 app.use('/users', UserRouter);
 app.use('/userboardgames', UserBoardGameRouter);
 app.use('/auth', AuthRouter);
-// *app.get('/api/protected', jwtAuth, (req, res) => {
-//     return res.json({ data: 'rosebud' });
-// });
 
 app.use('*', (req, res) => {
     return res.status(404).json({ message: 'Not Found' });

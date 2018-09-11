@@ -1,11 +1,7 @@
 const express = require('express');
 const jsonParser = require('body-parser').json();
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 const User = require('./models');
-const BoardGame = require('../boardgames/models');
-const config = require('../config');
-const basicAuth = passport.authenticate('basic', { session: false });
 const jwtAuth = passport.authenticate('jwt', { session: false });
 const router = express.Router();
 let Sequelize = require('sequelize');

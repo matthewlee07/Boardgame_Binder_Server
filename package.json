@@ -1,5 +1,5 @@
 {
-  "name": "boardgamemaker",
+  "name": "boardgamebinderserver",
   "version": "1.0.0",
   "description": "relationalDB",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matthewlee07/boardgameMaker.git"
+    "url": "git+https://github.com/matthewlee07/boardgame_binder_server"
   },
   "author": "matthew lee",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/matthewlee07/boardgameMaker/issues"
+    "url": "https://github.com/matthewlee07/boardgame_binder_server/issues"
   },
-  "homepage": "https://github.com/matthewlee07/boardgameMaker#readme",
+  "homepage": "https://github.com/matthewlee07/boardgame_binder_server#readme",
   "devDependencies": {
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
