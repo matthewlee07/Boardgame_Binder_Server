@@ -43,5 +43,5 @@ const jwtStrategy = new JwtStrategy(
         done(null, payload.user);
     }
 );
-
+// testing
 module.exports = { localStrategy, jwtStrategy };
