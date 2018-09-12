@@ -34,7 +34,8 @@ router.get('/', (req, res) => {
             ]
         })
         .then(games => {
-            res.json(games);
+            console.log(games);
+            res.status(200).json(games);
         })
         .catch(err => {
             console.error(err);
