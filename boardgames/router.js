@@ -8,27 +8,51 @@ const Op = Sequelize.Op;
 router.get('/', (req, res) => {
     let page = req.query.page || 0;
     let pageSize = req.query.pageSize || 10;
+    console.log({
+        limit: pageSize,
+        offset: page * pageSize,
+        where: {
+            name: {
+                [Op.iLike]: "%" + (req.query.name || "game") + "%"
+            },
+            minplayers: {
+                [Op.gte]: req.query.minplayers || 1
+            },
+            maxplayers: {
+                [Op.lte]: req.query.maxplayers || 20
+            },
+            playingtime: {
+                [Op.between]: [req.query.minplayingtime || 0, req.query.maxplayingtime || 1000]
+            },
+            rating: {
+                [Op.between]: [req.query.minrating || 0, req.query.maxrating || 10]
+            }
+        },
+        order: [
+            ['stats_average', 'DESC']
+        ]
+    })
     BoardGame
         .findAll({
-            limit: pageSize,
-            offset: page * pageSize,
-            where: {
-                name: {
-                    [Op.iLike]: "%" + (req.query.name || "game") + "%"
-                },
-                minplayers: {
-                    [Op.gte]: req.query.minplayers || 1
-                },
-                maxplayers: {
-                    [Op.lte]: req.query.maxplayers || 20
-                },
-                playingtime: {
-                    [Op.between]: [req.query.minplayingtime || 0, req.query.maxplayingtime || 1000]
-                },
-                rating: {
-                    [Op.between]: [req.query.minrating || 0, req.query.maxrating || 10]
-                }
-            },
+            // limit: pageSize,
+            // offset: page * pageSize,
+            // where: {
+            //     name: {
+            //         [Op.iLike]: "%" + (req.query.name || "game") + "%"
+            //     },
+            //     minplayers: {
+            //         [Op.gte]: req.query.minplayers || 1
+            //     },
+            //     maxplayers: {
+            //         [Op.lte]: req.query.maxplayers || 20
+            //     },
+            //     playingtime: {
+            //         [Op.between]: [req.query.minplayingtime || 0, req.query.maxplayingtime || 1000]
+            //     },
+            //     rating: {
+            //         [Op.between]: [req.query.minrating || 0, req.query.maxrating || 10]
+            //     }
+            // },
             order: [
                 ['stats_average', 'DESC']
             ]
