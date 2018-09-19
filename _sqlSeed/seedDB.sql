@@ -1,6 +1,6 @@
 -- Drop tables
-DROP TABLE "UserBoardGames";
-DROP TABLE "Users";
+DROP TABLE IF EXISTS "UserBoardGames";
+DROP TABLE IF EXISTS "Users";
 -- Create and seed Users table
 CREATE TABLE "Users" ("id" SERIAL, "userName" VARCHAR(255), "firstName" VARCHAR(255), "lastName" VARCHAR(255), "email" VARCHAR(255), "password" VARCHAR(255), "updatedAt" TIMESTAMP, "createdAt" TIMESTAMP);
 INSERT INTO "Users" VALUES (DEFAULT,'user1', 'firstname', 'lastname', 'email1@email.com', '$2a$10$Cp4E5loIcYseFxjE90Gfy.f5EoWifaEvyk6hLZD6dlNYe3sffFbs2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
