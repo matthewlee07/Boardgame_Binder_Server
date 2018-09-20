@@ -7,6 +7,9 @@ const jsonParser = bodyParser.json();
 const passport = require('passport');
 const jwtAuth = passport.authenticate('jwt', { session: false });
 const UserBoardGame = require('./models');
+const Sequelize = require('sequelize');
+const sequelize = Sequelize;
+
 router.get('/', jwtAuth, (req, res) => {
     User
         .find({
@@ -61,7 +64,7 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
         .catch(err => {
             console.log(err)
         })
-})
+});
 
 router.put('/:id', jwtAuth, jsonParser, (req, res) => {
     UserBoardGame
@@ -77,7 +80,7 @@ router.put('/:id', jwtAuth, jsonParser, (req, res) => {
         .catch(err => {
             console.log(err)
         })
-})
+});
 
 router.delete('/:id', jwtAuth, (req, res) => {
     UserBoardGame
@@ -90,6 +93,21 @@ router.delete('/:id', jwtAuth, (req, res) => {
         .catch(err => {
             console.log(err)
         })
-})
+});
+
+router.get('/popular', (req, res) => {
+    UserBoardGame
+        .findAll({
+            attributes: ['boardGameID',
+                [sequelize.fn('count', sequelize.col('*')), 'count']],
+            group: ['boardGameID']
+        }).then(popular => {
+            res.status(200).json(popular);
+            console.log(popular)
+        }).catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Search failed' });
+        });
+});
 
 module.exports = router;
