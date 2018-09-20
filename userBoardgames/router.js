@@ -100,10 +100,13 @@ router.get('/popular', (req, res) => {
         .findAll({
             attributes: ['boardGameID',
                 [sequelize.fn('count', sequelize.col('*')), 'count']],
-            group: ['boardGameID']
-        }).then(popular => {
-            res.status(200).json(popular);
-            console.log(popular)
+            group: ['boardGameID'],
+            order: [
+                ['count', 'DESC']
+            ]
+        }).then(games => {
+            res.status(200).json(games);
+            games.forEach(game => { console.log(game.dataValues) })
         }).catch(err => {
             console.error(err);
             res.status(500).json({ error: 'Search failed' });
