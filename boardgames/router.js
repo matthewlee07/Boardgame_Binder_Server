@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
     let pageSize = req.query.pageSize || 10;
     BoardGame
         .findAll({
-            // limit: pageSize,
-            // offset: page * pageSize,
+            limit: pageSize,
+            offset: page * pageSize,
             // where: {
             //     name: {
             //         [Op.iLike]: "%" + (req.query.name || "game") + "%"
